@@ -1,0 +1,52 @@
+---
+title: "Assignment 1 Q2"
+author: "Zhen Xien Lim"
+date: "22 August 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+Q2.
+```{r}
+#a The amount fo annual loan repayment for Scott 
+Scottloan=annualrep
+Scottloan
+```
+
+```{r}
+#b To find the term of loan repayment with offset account, we first create a function with the variable 'n' and then use the uniroot function to solve for the n term for loan repayment.
+loan=600000
+int=0.035
+offsetacc=100000
+loanrepay=annualrep+(offsetacc*int)
+loanrepay
+```
+
+```{r}
+#c
+f=function(n){
+  repayment=c(rep(loanrepay,30))
+  v=1/(1.035)^n
+  PV=sum(repayment*v)
+  return(500000-PV)
+}
+# The uniroot calculates n as 22 years. 
+uniroot(f,c(0,30))
+```
+
+```{r}
+#d To find the final smaller amount or payment, we find the balance of loan at 22nd payment, which is found by deducting the discounted loan repayment from accummulated loan of $600000. Then we accummulate further the balance of loan by one year and then get the final payment by taking away the amount in offset account and final interest from the offset account. 
+AB22=600000*(1.035)^22-loanrepay*(((1.035^22)-1)/0.035)
+AB23=AB22*1.035
+lastpay=AB23-3500-100000
+lastpay
+```

@@ -1,0 +1,129 @@
+---
+title: "Assignment 1Q4"
+author: "Zhen Xien Lim"
+date: "22 August 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+Q4.
+```{r}
+#a First we create the vectors of dates for each life. 
+A=as.Date(c("16may1965","21july1985","22june1994"),"%d%B%Y")
+B=as.Date(c("01march1922","23september1955","21july1993"),"%d%B%Y")
+C=as.Date(c("21september1942","02June1967","29april1996"),"%d%B%Y")
+```
+
+```{r}
+# We modify the difference of two dates into unit of years.
+yeardiffA=difftime(A[3],A[1])
+a=(yeardiffA/365.25)
+a
+```
+
+```{r}
+# Age next birthday at death is calculated by taking the difference between date of death and date of birth and adjust it to be the age next birthday.
+agenextbdA=as.integer(ifelse(a>as.integer(a),a+1,a))-1+1
+agenextbdA
+```
+
+```{r}
+# Age last birthday at 1 Jan preceding death
+agelastbdA=as.integer(a)-1
+agelastbdA
+```
+
+```{r}
+# Age at birthday in policy year of death is obtained by making changes to the unit 'year' in the dates using as.POSIXlt function.
+tmp=as.POSIXlt(A[2])
+tmp$year=tmp$year+as.integer((difftime(A[3],A[2]))/365.25) 
+datemod=format(tmp)
+tmp1=as.POSIXlt(A[2])
+tmp1$year=tmp1$year+(as.integer(((difftime(A[3],A[2]))/365.25)+1))
+datemod1=format(tmp1)
+tmp2=as.POSIXlt(A[1])
+tmp2$year=tmp2$year+as.integer((difftime(A[3],A[1]))/365.25) 
+datemod2=format(tmp2)
+ageatbdPLA=ifelse(datemod<=datemod2&&A[3]<=datemod1,as.integer(a),"")
+ageatbdPLA=ageatbdPLA+1-1
+ageatbdPLA
+```
+
+```{r}
+# We modify the difference of two dates into unit of years.
+yeardiffB=difftime(B[3],B[1])
+b=(yeardiffB/365.25)
+b
+```
+
+```{r}
+## Age next birthday at death is calculated by taking the difference between date of death and date of birth and adjust it to be the age next birthday.
+agenextbdB=as.integer(ifelse(b>as.integer(b),b+1,b))+1-1
+agenextbdB
+```
+
+```{r}
+##Age last birthday at 1 Jan preceding death
+agelastbdB=as.integer(b)-1
+agelastbdB
+```
+
+```{r}
+# Age at birthday in policy year of death is obtained by making changes to the unit 'year' in the dates using as.POSIXlt function.
+tmp3=as.POSIXlt(B[2])
+tmp3$year=tmp3$year+as.integer((difftime(B[3],B[2]))/365.25) 
+datemod3=format(tmp3)
+tmp4=as.POSIXlt(B[2])
+tmp4$year=tmp4$year+(as.integer(((difftime(B[3],B[2]))/365.25)+1))
+datemod4=format(tmp4)
+tmp5=as.POSIXlt(B[1])
+tmp5$year=tmp2$year+as.integer((difftime(B[3],B[1]))/365.25) 
+datemod5=format(tmp5)
+ageatbdPLB=ifelse(datemod3<=datemod5&&B[3]<=datemod4,as.integer(b),"")
+ageatbdPLB=ageatbdPLB+1-1
+ageatbdPLB
+```
+
+```{r}
+# We modify the difference of two dates into unit of years.
+yeardiffC=difftime(C[3],C[1])
+c=(yeardiffC/365.25)
+c
+```
+
+```{r}
+# Age next birthday at death is calculated by taking the difference between date of death and date of birth and adjust it to be the age next birthday.
+agenextbdC=as.integer(ifelse(c>as.integer(c),c+1,c))+1-1
+agenextbdC
+```
+
+```{r}
+##Age last birthday at 1 Jan preceding death
+agelastbdC=as.integer(c)+1-1
+agelastbdC
+```
+
+```{r}
+## Age at birthday in policy year of death is obtained by making changes to the unit 'year' in the dates using as.POSIXlt function.
+tmp6=as.POSIXlt(C[2])
+tmp6$year=tmp6$year+as.integer((difftime(C[3],C[2]))/365.25) 
+datemod6=format(tmp6)
+tmp7=as.POSIXlt(C[2])
+tmp7$year=tmp7$year+(as.integer(((difftime(C[3],C[2]))/365.25)+1))
+datemod7=format(tmp7)
+tmp8=as.POSIXlt(C[1])
+tmp8$year=tmp8$year+as.integer((difftime(C[3],C[1]))/365.25) 
+datemod8=format(tmp8)
+ageatbdPLC=ifelse(datemod6<=datemod8&&C[3]<=datemod7,as.integer(c),"")
+ageatbdPLC=ageatbdPLC+1-1
+ageatbdPLC
+```
